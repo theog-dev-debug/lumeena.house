@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumeena House — Beautypreneur Growth Partner</title>
+
+  <!-- Fonts: Playfair Display (serif elegan) + Unica One (accent) + Inter (sans-serif tipis) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Unica+One&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============ BRAND TOKENS ============ */
+    :root {
+      /* Palet: krem/blush lembut, champagne-gold, maroon tua */
+      --cream: #FBF7F1;
+      --blush: #F6E7E1;
+      --blush-deep: #EFD9D2;
+      --champagne: #D6B981;
+      --champagne-soft: #E8D5B0;
+      --gold-line: rgba(214, 185, 129, 0.5);
+      --maroon: #6c0700;
+      --maroon-soft: #8a2a22;
+      --ink: #2A211E;
+      --ink-soft: #6B5E58;
+      --ink-mute: #A2968F;
+      --white: #FFFFFF;
+
+      /* Tipografi */
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-accent: 'Unica One', 'Arial Narrow', sans-serif;
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(246, 231, 225, 0.9) 0%, transparent 55%),
+        radial-gradient(circle at 88% 100%, rgba(239, 217, 210, 0.7) 0%, transparent 50%),
+        var(--cream);
+      background-attachment: fixed;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    /* ============ UTILITIES ============ */
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .section--tight { padding: 72px 0; }
+    .section--no-top { padding-top: 0; }
+
+    /* ============ TIPOGRAFI GLOBAL ============ */
+    .eyebrow {
+      font-family: var(--font-accent);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .eyebrow--center { text-align: center; }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: clamp(38px, 6.5vw, 68px);
+      line-height: 1.12;
+      margin-bottom: 24px;
+    }
+
+    h1 em, h2 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--maroon);
+    }
+
+    h2 {
+      font-size: clamp(30px, 4.5vw, 46px);
+      line-height: 1.18;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: clamp(20px, 2.5vw, 24px);
+      line-height: 1.3;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      margin-bottom: 18px;
+    }
+
+    .lede {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 620px;
+    }
+
+    .lede--center { margin-left: auto; margin-right: auto; text-align: center; }
+
+    /* ============ BINTANG HIAS ============ */
+    .star {
+      position: absolute;
+      background: linear-gradient(160deg, var(--champagne), var(--champagne-soft));
+      clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+      pointer-events: none;
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    .star.s1 { width: 34px; height: 54px; top: 9%; left: 6%; opacity: 0.22; }
+    .star.s2 { width: 18px; height: 28px; top: 22%; left: 11%; opacity: 0.18; }
+    .star.s3 { width: 28px; height: 44px; top: 13%; right: 8%; opacity: 0.28; }
+    .star.s4 { width: 16px; height: 26px; top: 26%; right: 13%; opacity: 0.20; }
+    .star.s5 { width: 24px; height: 38px; bottom: 12%; left: 9%; opacity: 0.18; }
+    .star.s6 { width: 30px; height: 48px; bottom: 16%; right: 7%; opacity: 0.24; }
+
+    /* ============ TOMBOL ============ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-accent);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 32px;
+      border-radius: 99px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .btn-primary {
+      background: var(--maroon);
+      color: var(--cream);
+      border-color: var(--maroon);
+    }
+
+    .btn-primary:hover {
+      background: var(--maroon-soft);
+      border-color: var(--maroon-soft);
+      box-shadow: 0 10px 28px rgba(108, 7, 0, 0.22);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--maroon);
+      border-color: var(--gold-line);
+    }
+
+    .btn-outline:hover {
+      background: var(--blush);
+      border-color: var(--champagne);
+      transform: translateY(-1px);
+    }
+
+    .btn-block { width: 100%; }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      padding: 120px 0 96px;
+      overflow: hidden;
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__content { max-width: 560px; }
+
+    .hero__sub {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--ink-soft);
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero__visual {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(160deg, var(--blush) 0%, var(--blush-deep) 100%);
+      box-shadow: 0 24px 60px rgba(108, 7, 0, 0.08);
+      border: 1px solid rgba(214, 185, 129, 0.3);
+    }
+
+    .hero__visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ============ BEAUTY READINESS CHECK (EMBED) ============ */
+    .check-section {
+      background: var(--white);
+      border-top: 1px solid rgba(214, 185, 129, 0.25);
+      border-bottom: 1px solid rgba(214, 185, 129, 0.25);
+    }
+
+    .check-embed {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ============ MIRROR SECTION ============ */
+    .mirror {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mirror__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .mirror__header {
+      position: sticky;
+      top: 100px;
+    }
+
+    .mirror__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .mirror__list li {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .mirror__list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--champagne);
+      font-weight: 400;
+    }
+
+    .mirror__closing {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 19px;
+      line-height: 1.6;
+      color: var(--maroon);
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gold-line);
+    }
+
+    /* ============ BRAND ESSENCE ============ */
+    .essence {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 64px 56px;
+      border: 1px solid rgba(214, 185, 129, 0.3);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(108, 7, 0, 0.04);
+    }
+
+    .essence p {
+      font-size: 17px;
+      line-height: 1.85;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .essence p:last-child { margin-bottom: 0; }
+
+    /* ============ 5 PILAR ============ */
+    .pillars {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .pillar {
+      background: var(--white);
+      border: 1px solid rgba(214, 185, 129, 0.28);
+      border-radius: var(--radius-md);
+      padding: 36px 32px;
+      transition: all 0.28s ease;
+      position: relative;
+      overflow: hidden;
+      /* Default width for 3 columns */
+      flex: 0 1 calc(33.333% - 19px);
+      min-width: 280px;
+    }
+
+    /* Center the last two cards proportionally */
+    .pillar:nth-child(4),
+    .pillar:nth-child(5) {
+      flex: 0 1 calc(40% - 14px);
+    }
+
+    .pillar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 32px;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--champagne), transparent);
+      border-radius: 99px;
+    }
+
+    .pillar:hover {
+      border-color: var(--champagne);
+      box-shadow: 0 12px 40px rgba(108, 7, 0, 0.07);
+      transform: translateY(-3px);
+    }
+
+    .pillar__num {
+      font-family: var(--font-accent);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--champagne);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .pillar h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .pillar p {
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    /* ============ CHECKLIST (Section 6) ============ */
+    .checklist-section {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(214, 185, 129, 0.3);
+      max-width: 1000px;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(108, 7, 0, 0.04);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .checklist-content {
+      padding: 64px 56px;
+    }
+
+    .checklist-content h2 {
+      text-align: left;
+    }
+
+    .checklist-visual {
+      position: relative;
+      min-height: 400px;
+      background: var(--blush);
+    }
+
+    .checklist-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .checklist li {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .checklist li::before {
+      content: "✦";
+      color: var(--champagne);
+      font-size: 11px;
+      padding-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ============ STORY ============ */
+    .story {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .story p {
+      font-size: 17px;
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+
+    .story p:last-child { margin-bottom: 0; }
+
+    .story__divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold-line);
+      margin: 40px auto;
+    }
+
+    /* ============ FINAL CTA ============ */
+    .final-cta {
+      text-align: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 80px 48px;
+      border: 1px solid rgba(214, 185, 129, 0.3);
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(108, 7, 0, 0.05);
+    }
+
+    .final-cta h2 { margin-bottom: 28px; }
+
+    .final-cta__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      margin-top: 32px;
+    }
+
+    .final-cta__secondary {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--ink-mute);
+    }
+
+    .final-cta__secondary a {
+      color: var(--maroon);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-line);
+      transition: border-color 0.2s ease;
+    }
+
+    .final-cta__secondary a:hover {
+      border-color: var(--maroon);
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+      padding: 56px 0 48px;
+      border-top: 1px solid rgba(214, 185, 129, 0.3);
+      text-align: center;
+    }
+
+    .footer__brand {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .footer__tagline {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--ink-mute);
+      max-width: 420px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-family: var(--font-accent);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer__links a:hover { color: var(--maroon); }
+
+    .footer__copy {
+      margin-top: 36px;
+      font-size: 12px;
+      color: var(--ink-mute);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 960px) {
+      .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero__content { max-width: 100%; }
+      .hero__visual { max-width: 420px; margin: 0 auto; width: 100%; }
+      .mirror__grid { grid-template-columns: 1fr; gap: 32px; }
+      .mirror__header { position: static; }
+      
+      .checklist-section {
+        grid-template-columns: 1fr;
+      }
+      .checklist-visual {
+        min-height: 300px;
+        order: -1; /* Puts image above text on mobile */
+      }
+      .checklist-content {
+        padding: 48px 28px;
+      }
+      .checklist-content h2 {
+        text-align: center;
+      }
+
+      .pillar {
+        flex: 0 1 calc(50% - 14px); /* 2 columns */
+      }
+      .pillar:nth-child(4),
+      .pillar:nth-child(5) {
+        flex: 0 1 calc(50% - 14px); /* Keeps 2 columns on tablet */
+      }
+    }
+
+    @media (max-width: 720px) {
+      .section { padding: 64px 0; }
+      .hero { padding: 80px 0 64px; }
+      .essence { padding: 48px 28px; }
+      .final-cta { padding: 56px 24px; }
+      .star { display: none; }
+      .hero__actions { flex-direction: column; align-items: stretch; }
+      .hero__actions .btn { width: 100%; }
+      
+      .pillar {
+        flex: 0 1 100%; /* 1 column */
+      }
+      .pillar:nth-child(4),
+      .pillar:nth-child(5) {
+        flex: 0 1 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container { padding: 0 18px; }
+      h1 { font-size: clamp(32px, 8vw, 44px); }
+      h2 { font-size: clamp(26px, 7vw, 34px); }
+      .btn { padding: 16px 24px; font-size: 12px; }
+      .footer__links { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+
+    <div class="container">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <span class="eyebrow">Lumeena House</span>
+          <h1>Dari Skilled MUA,<br><em>Jadi Beautypreneur</em></h1>
+          <p class="hero__sub">
+            Kamu udah membangun semuanya sendiri. Dari nol, dari kepercayaan klien, dari jam terbang yang nggak instan. Sekarang saatnya kasih ruang buat bisnis kamu bertumbuh sebesar hati kamu membangunnya.
+          </p>
+          <div class="hero__actions">
+            <a href="#readiness-check" class="btn btn-primary">Beautypreneur Readiness Check (Gratis)</a>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <!-- Foto 1: Hero Image -->
+          <img src="MUA sedang merias klien di depan jendela besar (section 1).jpg" alt="MUA sedang merias klien di depan jendela besar" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BEAUTY READINESS CHECK (EMBED)
+       ============================================================ -->
+  <section class="section check-section" id="readiness-check">
+    <div class="container">
+      <div class="check-embed">
+        <div id="lumeena-check-app"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MIRROR SECTION — "Apakah Ini Kamu?"
+       ============================================================ -->
+  <section class="section mirror" id="mirror">
+    <div class="star s5"></div>
+    <div class="star s6"></div>
+    <div class="container">
+      <div class="mirror__grid">
+        <div class="mirror__header">
+          <span class="eyebrow">Apakah Ini Kamu?</span>
+          <h2>Kalau Kamu Merasa Familiar Sama Ini, <em>Kamu Nggak Sendirian.</em></h2>
+        </div>
+
+        <div>
+          <ul class="mirror__list">
+            <li>Udah ngelayanin 300+ klien, tapi harga masih ditentuin "berdasarkan mood" bukan strategi.</li>
+            <li>Kalender penuh terus, tapi nggak yakin itu artinya bisnis kamu sehat secara finansial.</li>
+            <li>Nama kamu udah dikenal, tapi semua — booking, komunikasi klien, keuangan — masih kamu pegang sendirian.</li>
+            <li>Kamu udah jago makeup dari dulu. Yang belum pernah ada, sistem di belakangnya.</li>
+          </ul>
+
+          <p class="mirror__closing">
+            Skill kamu udah nggak diragukan. Yang sering ketinggalan adalah bisnis di baliknya.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT LUMEENA HOUSE IS (BRAND ESSENCE)
+       ============================================================ -->
+  <section class="section section--tight" id="about">
+    <div class="container">
+      <div class="essence">
+        <span class="eyebrow eyebrow--center">Tentang Kami</span>
+        <h2>Apa Itu <em>Lumeena House?</em></h2>
+        <p>
+          Lumeena House adalah partner pertumbuhan bisnis untuk MUA independen yang sudah punya jam terbang dan basis klien sendiri, tapi ingin berkembang dari sekadar penyedia jasa makeup menjadi bisnis yang lebih fokus, profesional, dan berkelanjutan.
+        </p>
+        <p>
+          Kita bukan tempat belajar teknik makeup baru. Kita partner di belakang layar, bantu kamu membangun fondasi bisnis, merapikan cara kerja, dan mengambil langkah yang lebih strategis untuk berkembang.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW WE HELP (5 PILAR)
+       ============================================================ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 8px;">
+        <span class="eyebrow eyebrow--center">Layanan Kami</span>
+        <h2>Bagaimana Lumeena House <em>Membantu</em></h2>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar__num">01</span>
+          <h3>Business Administration Support</h3>
+          <p>Bantu urus kebutuhan administratif dan operasional, biar kamu bisa fokus ke klien dan pengembangan karier.</p>
+        </article>
+
+        <article class="pillar">
+          <span class="pillar__num">02</span>
+          <h3>Marketing &amp; Business Strategy</h3>
+          <p>Bantu susun strategi marketing, positioning, dan personal branding yang sesuai gaya dan situasi bisnis kamu.</p>
+        </article>
+
+        <article class="pillar">
+          <span class="pillar__num">03</span>
+          <h3>Financial Management Guidance</h3>
+          <p>Bantu kamu paham dan menerapkan dasar-dasar pengelolaan keuangan bisnis — dari harga jual sampai perencanaan keuangan.</p>
+        </article>
+
+        <article class="pillar">
+          <span class="pillar__num">04</span>
+          <h3>Growth Mindset &amp; Business Mentoring</h3>
+          <p>Pendampingan buat menumbuhkan pola pikir yang terbuka sama pembelajaran, perubahan, evaluasi, dan peluang bisnis.</p>
+        </article>
+
+        <article class="pillar">
+          <span class="pillar__num">05</span>
+          <h3>Community &amp; Support System</h3>
+          <p>Jadi bagian dari komunitas positif tempat sesama MUA belajar, berbagi pengalaman, dan berkembang bersama.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHO THIS IS FOR (CHECKLIST)
+       ============================================================ -->
+  <section class="section section--tight" id="for-you">
+    <div class="container">
+      <div class="checklist-section">
+        <div class="checklist-content">
+          <span class="eyebrow">Kualifikasi</span>
+          <h2>Lumeena House Cocok <em>Buat Kamu Kalau...</em></h2>
+
+          <ul class="checklist">
+            <li>Sudah menjalankan bisnis MUA selama 2-5 tahun</li>
+            <li>Sudah melayani minimal 300 klien</li>
+            <li>Punya skill teknis dasar yang sudah solid</li>
+            <li>Sudah punya personal brand dan mulai dikenal di area Surabaya, Sidoarjo, atau Gresik</li>
+            <li>Ingin berkembang dari MUA independen menjadi beautypreneur</li>
+            <li>Butuh guidance soal manajemen bisnis, keuangan, strategi, dan mindset untuk bertumbuh</li>
+          </ul>
+        </div>
+        
+        <div class="checklist-visual">
+          <!-- Foto 2: Section 6 Image -->
+          <img src="MUA sedang merias model dengan fokus (section 6).jpg" alt="MUA sedang merias model dengan fokus" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       KENAPA LUMEENA HOUSE ADA (FOUNDER STORY)
+       ============================================================ -->
+  <section class="section" id="story">
+    <div class="container">
+      <div class="story">
+        <span class="eyebrow eyebrow--center">Cerita Kami</span>
+        <h2>Cerita di Balik <em>Lumeena House</em></h2>
+
+        <div class="story__divider"></div>
+
+        <p>
+          Lumeena House lahir dari percakapan yang berulang kali kami dengar dari para MUA independen. Cerita tentang malam-malam sibuk menghitung uang masuk-keluar sendirian, tentang harga yang nggak berani dinaikkan meski udah pantas, tentang rasa lelah yang datang bukan dari makeup, tapi dari semua hal di baliknya yang harus dipikirkan sendiri.
+        </p>
+
+        <p>
+          Kami percaya, setiap MUA yang udah bertahan sejauh ini pantas punya seseorang yang berdiri di sisinya. Bukan buat ngajarin teknik baru, tapi buat bantu merapikan dan memperkuat apa yang udah susah payah dibangun. Itulah kenapa Lumeena House ada: jadi teman seperjalanan di balik layar, supaya kamu nggak perlu membesarkan bisnis ini sendirian lagi.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="section section--tight" id="final-cta">
+    <div class="container">
+      <div class="final-cta">
+        <span class="eyebrow eyebrow--center">Langkah Berikutnya</span>
+        <h2>Siap Lihat Posisi <em>Bisnis Kamu Sekarang?</em></h2>
+
+        <div class="final-cta__actions">
+          <a href="#readiness-check" class="btn btn-primary btn-block">Isi Beautypreneur Readiness Check (Gratis)</a>
+          <p class="final-cta__secondary">
+            Belum siap isi form? <a href="https://wa.me/62890000000" target="_blank" rel="noopener">Chat dulu aja lewat WhatsApp →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__brand">Lumeena House</div>
+      <p class="footer__tagline">
+        Business growth partner untuk independent makeup artists di Surabaya, Sidoarjo &amp; Gresik.
+      </p>
+
+      <ul class="footer__links">
+        <li><a href="https://instagram.com/lumeena.house" target="_blank" rel="noopener">Instagram @lumeena.house</a></li>
+        <li><a href="https://threads.net/@lumeena.house" target="_blank" rel="noopener">Threads @lumeena.house</a></li>
+        <li><a href="https://wa.me/62890000000" target="_blank" rel="noopener">WhatsApp +62 890-000-000</a></li>
+      </ul>
+
+      <p class="footer__copy">© 2026 Lumeena House. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       SCRIPT: BEAUTY READINESS CHECK (EMBEDDED)
+       ============================================================ -->
+  <script>
+    (function() {
+      // Konfigurasi
+      const WA_NUMBER = "62890000000"; // ganti dengan nomor Lumeena House
+
+      // Data pertanyaan
+      const questions = [
+        {
+          q: "Sudah berapa lama kamu menjalankan bisnis MUA secara profesional?",
+          options: [
+            { text: "Kurang dari 2 tahun", points: 1 },
+            { text: "2–5 tahun", points: 2 },
+            { text: "Lebih dari 5 tahun", points: 3 }
+          ]
+        },
+        {
+          q: "Kira-kira sudah berapa banyak klien yang kamu tangani sejauh ini?",
+          options: [
+            { text: "Kurang dari 100 klien", points: 1 },
+            { text: "100–300 klien", points: 2 },
+            { text: "Lebih dari 300 klien", points: 3 }
+          ]
+        },
+        {
+          q: "Bagaimana cara kamu menentukan harga jasa saat ini?",
+          options: [
+            { text: "Masih sering nego per klien, belum ada patokan jelas", points: 1 },
+            { text: "Sudah ada harga paket, tapi kadang masih fleksibel", points: 2 },
+            { text: "Harga paket jelas dan konsisten, jarang dinego", points: 3 }
+          ]
+        },
+        {
+          q: "Bagaimana kondisi pencatatan keuangan bisnis kamu?",
+          options: [
+            { text: "Belum ada pencatatan rutin", points: 1 },
+            { text: "Dicatat sesekali, belum rapi", points: 2 },
+            { text: "Dicatat rutin dan dievaluasi berkala", points: 3 }
+          ]
+        },
+        {
+          q: "Kapan terakhir kali kamu menaikkan harga jasa?",
+          options: [
+            { text: "Nggak ingat, atau belum pernah", points: 1 },
+            { text: "Lebih dari setahun yang lalu", points: 2 },
+            { text: "Dalam setahun terakhir, dengan pertimbangan matang", points: 3 }
+          ]
+        },
+        {
+          q: "Siapa yang mengerjakan operasional bisnis (booking, komunikasi klien, keuangan, marketing)?",
+          options: [
+            { text: "Semua aku kerjakan sendiri", points: 1 },
+            { text: "Sebagian sudah dibantu orang lain", points: 2 },
+            { text: "Sudah ada sistem atau tim yang membantu sebagian besar", points: 3 }
+          ]
+        },
+        {
+          q: "Kalau tiba-tiba kamu sakit dan nggak bisa kerja selama 2 minggu, apa yang terjadi ke bisnismu?",
+          options: [
+            { text: "Bisnis langsung berhenti total", points: 1 },
+            { text: "Beberapa hal masih jalan, tapi keteteran", points: 2 },
+            { text: "Bisnis tetap berjalan dengan bantuan sistem atau tim", points: 3 }
+          ]
+        },
+        {
+          q: "Bagaimana strategi marketing kamu saat ini?",
+          options: [
+            { text: "Cuma mengandalkan repeat order dan word-of-mouth", points: 1 },
+            { text: "Ada beberapa strategi, tapi belum konsisten", points: 2 },
+            { text: "Ada strategi marketing dan branding yang jelas dan konsisten", points: 3 }
+          ]
+        },
+        {
+          q: "Apa yang paling sering bikin kamu capek secara mental dalam menjalankan bisnis ini?",
+          options: [
+            { text: "Semuanya sekaligus — klien, keuangan, branding", points: 1 },
+            { text: "Salah satu aspek tertentu, tapi masih bisa dikelola", points: 2 },
+            { text: "Sudah cukup terkendali, capeknya lebih ke workload teknis", points: 3 }
+          ]
+        },
+        {
+          q: "Kalau bisa pilih satu hal yang paling ingin kamu perbaiki dalam 6 bulan ke depan, apa itu?",
+          options: [
+            { text: "Dasar-dasar bisnis — harga, keuangan, sistem", points: 1 },
+            { text: "Strategi pertumbuhan dan marketing", points: 2 },
+            { text: "Memperkuat posisi dan memperluas tim atau skala", points: 3 }
+          ]
+        }
+      ];
+
+      // Result bands
+      const bands = [
+        {
+          min: 10, max: 16,
+          name: "Skilled Artist",
+          condition: "Kamu masih di tahap awal membangun fondasi bisnis. Sebagian besar operasional masih kamu pegang sendiri, harga belum konsisten, dan belum ada sistem yang menopang kalau kamu berhenti sebentar saja.",
+          urgent: "Di skor ini, bisnismu 100% bergantung pada tenaga dan waktu kamu pribadi — nggak ada jarak aman. Setiap hari kamu nggak kerja = setiap hari itu nggak ada pemasukan, dan nggak ada yang bisa gantiin peran kamu di operasional."
+        },
+        {
+          min: 17, max: 23,
+          name: "Growing Operator",
+          condition: "Kamu punya jam terbang dan basis klien yang solid, tapi ada 1–2 titik lemah (biasanya di harga, keuangan, atau delegasi) yang menahan kamu dari naik kelas.",
+          urgent: "Ini titik paling rawan stagnan — cukup nyaman untuk merasa \u201Cbaik-baik saja\u201D, tapi cukup rapuh untuk kehilangan momentum kalau nggak segera dibenahi. Banyak MUA bertahan di skor ini selama bertahun-tahun tanpa sadar."
+        },
+        {
+          min: 24, max: 30,
+          name: "Beautypreneur-in-Progress",
+          condition: "Fondasi bisnis kamu udah kuat di hampir semua sisi — harga jelas, keuangan tercatat, ada mulai sistem/tim.",
+          urgent: "Kamu udah terlalu jauh untuk berhenti di level ini. Risiko terbesar sekarang bukan bertahan, tapi stuck di ukuran bisnis yang sama tanpa strategi yang tepat untuk benar-benar scale up — momentum ini gampang hilang kalau nggak segera diarahkan."
+        }
+      ];
+
+      // State
+      let current = 0;
+      const answers = new Array(questions.length).fill(null);
+      let locked = false;
+
+      const app = document.getElementById("lumeena-check-app");
+
+      // Helper
+      function getBand(score) {
+        return bands.find(b => score >= b.min && score <= b.max) || bands[0];
+      }
+
+      function totalScore() {
+        return answers.reduce((sum, p) => sum + (p || 0), 0);
+      }
+
+      function buildWaLink(score, band) {
+        const message =
+          `Halo Lumeena House, saya sudah ikut Beautypreneur Readiness Check. ` +
+          `Skor saya ${score} (${band.name}). ` +
+          `Saya ingin konsultasi tentang langkah berikutnya untuk bisnis MUA saya.`;
+        return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+      }
+
+      // ===== Styles (scoped to the embedded app) =====
+      const checkStyles = `
+        <style>
+          #lumeena-check-app {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 300;
+            color: #2A211E;
+            background: #FFFFFF;
+            border: 1px solid rgba(214,185,129,.35);
+            border-radius: 24px;
+            padding: 56px 52px 48px;
+            box-shadow: 0 20px 60px rgba(108,7,0,.06), 0 4px 16px rgba(42,33,30,.04);
+            position: relative;
+            max-width: 640px;
+            margin: 0 auto;
+            overflow: hidden;
+            line-height: 1.6;
+          }
+
+          #lumeena-check-app::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 64px; height: 2px;
+            background: linear-gradient(90deg, transparent, #D6B981, transparent);
+            border-radius: 99px;
+          }
+
+          #lumeena-check-app * { box-sizing: border-box; margin: 0; padding: 0; }
+
+          #lumeena-check-app .ck-eyebrow {
+            font-family: 'Unica One', 'Arial Narrow', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: #D6B981;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+
+          #lumeena-check-app h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(32px, 6.4vw, 48px);
+            line-height: 1.16;
+            text-align: center;
+            letter-spacing: .01em;
+            color: #2A211E;
+            margin-bottom: 18px;
+          }
+
+          #lumeena-check-app h1 em {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-weight: 500;
+            color: #6c0700;
+          }
+
+          #lumeena-check-app .ck-lede {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.75;
+            text-align: center;
+            color: #6B5E58;
+            max-width: 440px;
+            margin: 0 auto 34px;
+          }
+
+          #lumeena-check-app .ck-progress-wrap { margin-bottom: 30px; }
+
+          #lumeena-check-app .ck-progress-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Unica One', sans-serif;
+            font-weight: 400;
+            font-size: 11px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: #A2968F;
+            margin-bottom: 12px;
+          }
+
+          #lumeena-check-app .ck-progress-track {
+            height: 2px;
+            background: #EFD9D2;
+            border-radius: 99px;
+            overflow: hidden;
+          }
+
+          #lumeena-check-app .ck-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #6c0700, #D6B981);
+            border-radius: 99px;
+            transition: width .4s ease;
+          }
+
+          #lumeena-check-app .ck-question {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 500;
+            font-size: clamp(20px, 3.6vw, 25px);
+            line-height: 1.44;
+            color: #2A211E;
+            margin-bottom: 28px;
+            letter-spacing: .005em;
+          }
+
+          #lumeena-check-app .ck-options {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+          }
+
+          #lumeena-check-app .ck-option {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 15.5px;
+            line-height: 1.5;
+            text-align: left;
+            color: #2A211E;
+            background: #FBF7F1;
+            border: 1px solid rgba(214,185,129,.32);
+            border-radius: 10px;
+            padding: 17px 22px;
+            cursor: pointer;
+            transition: all .22s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            width: 100%;
+          }
+
+          #lumeena-check-app .ck-option:hover {
+            background: #F6E7E1;
+            border-color: #D6B981;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(108,7,0,.06);
+          }
+
+          #lumeena-check-app .ck-option.selected {
+            background: #EFD9D2;
+            border-color: #D6B981;
+          }
+
+          #lumeena-check-app .ck-option .ck-marker {
+            font-family: 'Unica One', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            color: #D6B981;
+            letter-spacing: .08em;
+            flex-shrink: 0;
+            padding-top: 3px;
+            min-width: 14px;
+          }
+
+          #lumeena-check-app .ck-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 28px;
+            gap: 12px;
+          }
+
+          #lumeena-check-app .ck-btn-back {
+            font-family: 'Unica One', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #A2968F;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px 0;
+            transition: color .2s ease;
+          }
+
+          #lumeena-check-app .ck-btn-back:hover { color: #6c0700; }
+          #lumeena-check-app .ck-btn-back:disabled { opacity: .3; cursor: default; }
+          #lumeena-check-app .ck-btn-back:disabled:hover { color: #A2968F; }
+
+          #lumeena-check-app .ck-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Unica One', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 99px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all .25s ease;
+            width: 100%;
+            text-align: center;
+          }
+
+          #lumeena-check-app .ck-btn-primary {
+            background: #6c0700;
+            color: #FBF7F1;
+            border-color: #6c0700;
+          }
+
+          #lumeena-check-app .ck-btn-primary:hover {
+            background: #8a2a22;
+            border-color: #8a2a22;
+            box-shadow: 0 10px 28px rgba(108,7,0,.22);
+            transform: translateY(-1px);
+          }
+
+          #lumeena-check-app .ck-btn-wa {
+            background: transparent;
+            color: #6c0700;
+            border-color: rgba(214,185,129,.5);
+          }
+
+          #lumeena-check-app .ck-btn-wa:hover {
+            background: #F6E7E1;
+            border-color: #D6B981;
+            transform: translateY(-1px);
+          }
+
+          #lumeena-check-app .ck-start-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+          }
+
+          #lumeena-check-app .ck-meta-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            margin: 0 auto 34px;
+            max-width: 400px;
+          }
+
+          #lumeena-check-app .ck-meta-list li {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 14.5px;
+            color: #6B5E58;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            line-height: 1.55;
+          }
+
+          #lumeena-check-app .ck-meta-list li::before {
+            content: "✦";
+            color: #D6B981;
+            font-size: 10px;
+            padding-top: 4px;
+            flex-shrink: 0;
+          }
+
+          #lumeena-check-app .ck-result-score {
+            text-align: center;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+          }
+
+          #lumeena-check-app .ck-score-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(72px, 15vw, 100px);
+            line-height: 1;
+            color: #6c0700;
+            letter-spacing: .01em;
+          }
+
+          #lumeena-check-app .ck-score-total {
+            font-family: 'Unica One', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: .12em;
+            color: #A2968F;
+            text-transform: lowercase;
+          }
+
+          #lumeena-check-app .ck-band-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(26px, 5.2vw, 34px);
+            text-align: center;
+            color: #2A211E;
+            margin-bottom: 30px;
+            line-height: 1.2;
+          }
+
+          #lumeena-check-app .ck-result-block {
+            background: #FBF7F1;
+            border-left: 2px solid #D6B981;
+            padding: 20px 24px;
+            margin-bottom: 14px;
+            border-radius: 0 10px 10px 0;
+          }
+
+          #lumeena-check-app .ck-result-block .ck-label {
+            font-family: 'Unica One', sans-serif;
+            font-weight: 400;
+            font-size: 11px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: #D6B981;
+            margin-bottom: 9px;
+          }
+
+          #lumeena-check-app .ck-result-block p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.75;
+            color: #6B5E58;
+            margin: 0;
+          }
+
+          #lumeena-check-app .ck-result-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 32px;
+          }
+
+          #lumeena-check-app .ck-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(214,185,129,.5), transparent);
+            margin: 32px 0;
+          }
+
+          #lumeena-check-app .ck-fade-in {
+            animation: ckFadeIn .42s ease both;
+          }
+
+          @keyframes ckFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          @media (max-width: 560px) {
+            #lumeena-check-app {
+              padding: 42px 26px 36px;
+              border-radius: 16px;
+            }
+            #lumeena-check-app::before { width: 48px; }
+            #lumeena-check-app .ck-option { padding: 15px 18px; font-size: 14.5px; }
+            #lumeena-check-app .ck-result-block { padding: 18px 20px; }
+          }
+        </style>
+      `;
+
+      // ===== Render functions =====
+      function renderStart() {
+        app.innerHTML = checkStyles + `
+          <p class="ck-eyebrow">Lumeena House</p>
+          <h1>Beautypreneur<br><em>Readiness Check</em></h1>
+          <p class="ck-lede">
+            10 pertanyaan untuk tahu di mana posisi bisnis MUA kamu —
+            dan apa yang paling urgent dibenahi.
+          </p>
+
+          <ul class="ck-meta-list">
+            <li>2 menit selesai, tanpa email</li>
+            <li>Langsung dapat skor 10–30</li>
+            <li>Hasil berisi rekomendasi langkah berikutnya</li>
+            <li>Untuk MUA di Surabaya, Sidoarjo &amp; Gresik</li>
+          </ul>
+
+          <div class="ck-start-actions">
+            <button class="ck-btn ck-btn-primary" id="ck-btn-start">Mulai Beautypreneur Readiness Check</button>
+            <a class="ck-btn ck-btn-wa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener">
+              Hubungi Kami di WhatsApp
+            </a>
+          </div>
+        `;
+
+        document.getElementById("ck-btn-start").addEventListener("click", () => {
+          current = 0;
+          answers.fill(null);
+          renderQuestion();
+        });
+      }
+
+      function renderQuestion() {
+        locked = false;
+        const item = questions[current];
+        const progress = (current / questions.length) * 100;
+
+        app.innerHTML = checkStyles + `
+          <div class="ck-progress-wrap">
+            <div class="ck-progress-meta">
+              <span>Pertanyaan ${current + 1} / ${questions.length}</span>
+              <span>${Math.round(progress)}%</span>
+            </div>
+            <div class="ck-progress-track">
+              <div class="ck-progress-fill" style="width:${progress}%"></div>
+            </div>
+          </div>
+
+          <p class="ck-question">${item.q}</p>
+
+          <div class="ck-options" id="ck-options">
+            ${item.options.map((opt, i) => `
+              <button class="ck-option" data-points="${opt.points}" data-index="${i}">
+                <span class="ck-marker">${String.fromCharCode(65 + i)}</span>
+                <span>${opt.text}</span>
+              </button>
+            `).join("")}
+          </div>
+
+          <div class="ck-nav">
+            <button class="ck-btn-back" id="ck-btn-back" ${current === 0 ? "disabled" : ""}>
+              ← Kembali
+            </button>
+          </div>
+        `;
+
+        app.classList.remove("ck-fade-in");
+        void app.offsetWidth;
+        app.classList.add("ck-fade-in");
+
+        document.querySelectorAll("#lumeena-check-app .ck-option").forEach(btn => {
+          btn.addEventListener("click", () => {
+            if (locked) return;
+            locked = true;
+
+            btn.classList.add("selected");
+            answers[current] = parseInt(btn.dataset.points, 10);
+
+            setTimeout(() => {
+              if (current < questions.length - 1) {
+                current++;
+                renderQuestion();
+              } else {
+                renderResult();
+              }
+            }, 260);
+          });
+        });
+
+        document.getElementById("ck-btn-back").addEventListener("click", () => {
+          if (current > 0) {
+            current--;
+            renderQuestion();
+          }
+        });
+      }
+
+      function renderResult() {
+        const score = totalScore();
+        const band = getBand(score);
+
+        app.innerHTML = checkStyles + `
+          <p class="ck-eyebrow">Hasil Kamu</p>
+
+          <div class="ck-result-score">
+            <span class="ck-score-number">${score}</span>
+            <span class="ck-score-total">dari total 30 poin</span>
+          </div>
+
+          <h2 class="ck-band-name">${band.name}</h2>
+
+          <div class="ck-result-block">
+            <div class="ck-label">Kondisi Kamu</div>
+            <p>${band.condition}</p>
+          </div>
+
+          <div class="ck-result-block">
+            <div class="ck-label">Kenapa Ini Urgent</div>
+            <p>${band.urgent}</p>
+          </div>
+
+          <div class="ck-divider"></div>
+
+          <p class="ck-lede" style="margin-bottom:22px;">
+            Mau tahu langkah konkret berikutnya? Diskusikan hasilmu dengan kami.
+          </p>
+
+          <div class="ck-result-actions">
+            <a class="ck-btn ck-btn-primary"
+               href="${buildWaLink(score, band)}"
+               target="_blank" rel="noopener">
+              Hubungi Kami di WhatsApp
+            </a>
+            <button class="ck-btn ck-btn-wa" id="ck-btn-restart">Ulangi Beautypreneur Readiness Check</button>
+          </div>
+        `;
+
+        app.classList.remove("ck-fade-in");
+        void app.offsetWidth;
+        app.classList.add("ck-fade-in");
+
+        document.getElementById("ck-btn-restart").addEventListener("click", () => {
+          current = 0;
+          answers.fill(null);
+          renderStart();
+        });
+      }
+
+      // Init
+      renderStart();
+    })();
+  </script>
+
+</body>
+</html>
