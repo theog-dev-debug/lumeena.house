@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lumeena House — Beautypreneur Growth Partner</title>
 
+  <link rel="icon" type="image/png" href="lumeena-logo-1.png">
+  <link rel="apple-touch-icon" href="lumeena-logo-1.png">
+
   <!-- Fonts: Playfair Display (serif elegan) + Unica One (accent) + Inter (sans-serif tipis) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Unica+One&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     /* ============ BRAND TOKENS ============ */
@@ -235,14 +241,17 @@
     }
 
     .navbar__brand {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 21px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      color: var(--maroon);
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
       flex-shrink: 0;
+    }
+
+    .navbar__logo {
+      height: 48px;
+      width: 48px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
     }
 
     .navbar__links {
@@ -289,7 +298,7 @@
     .navbar__cta {
       background: var(--maroon);
       color: var(--cream) !important;
-      padding: 11px 22px;
+      padding: 12px 26px;
       border-radius: 99px;
       transition: all 0.25s ease;
     }
@@ -609,25 +618,75 @@
     }
 
     /* ============ STORY ============ */
-    .story {
-      max-width: 720px;
+    .story__grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 56px;
+      align-items: stretch;
+      max-width: 1040px;
       margin: 0 auto;
-      text-align: center;
     }
 
-    .story p {
+    .story__content {
+      text-align: left;
+    }
+
+    .story__content p {
       font-size: 17px;
       line-height: 1.9;
       margin-bottom: 24px;
     }
 
-    .story p:last-child { margin-bottom: 0; }
+    .story__content p:last-child { margin-bottom: 0; }
+
+    .story__photo {
+      height: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(214, 185, 129, 0.3);
+      box-shadow: 0 20px 60px rgba(108, 7, 0, 0.06);
+    }
+
+    .story__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .story__divider {
       width: 48px;
       height: 1px;
       background: var(--gold-line);
-      margin: 40px auto;
+      margin: 24px 0 28px;
+    }
+
+    @media (max-width: 860px) {
+      .story__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .story__photo {
+        height: auto;
+      }
+
+      .story__photo img {
+        height: auto;
+        object-fit: initial;
+      }
+
+      .story__content {
+        text-align: center;
+      }
+
+      .story__content .eyebrow {
+        text-align: center;
+      }
+
+      .story__divider {
+        margin: 24px auto 28px;
+      }
     }
 
     /* ============ FINAL CTA ============ */
@@ -677,13 +736,14 @@
       text-align: center;
     }
 
-    .footer__brand {
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 12px;
-      letter-spacing: 0.02em;
+    .footer__logo {
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin: 0 auto 20px;
+      display: block;
+      box-shadow: 0 12px 30px rgba(108, 7, 0, 0.15);
     }
 
     .footer__tagline {
@@ -696,25 +756,44 @@
       line-height: 1.7;
     }
 
-    .footer__links {
+    .footer__social {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 28px;
+      gap: 16px;
       list-style: none;
     }
 
-    .footer__links a {
-      font-family: var(--font-accent);
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
+    .footer__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 16px rgba(42, 33, 30, 0.12);
       text-decoration: none;
-      transition: color 0.2s ease;
     }
 
-    .footer__links a:hover { color: var(--maroon); }
+    .footer__social a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(42, 33, 30, 0.2);
+    }
+
+    .footer__social a.footer__social--instagram {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+    }
+
+    .footer__social a.footer__social--threads {
+      background: #000000;
+    }
+
+    .footer__social a.footer__social--whatsapp {
+      background: #25d366;
+    }
 
     .footer__copy {
       margin-top: 36px;
@@ -763,7 +842,7 @@
       h1 { font-size: clamp(32px, 8vw, 44px); }
       h2 { font-size: clamp(26px, 7vw, 34px); }
       .btn { padding: 16px 24px; font-size: 12px; }
-      .footer__links { gap: 18px; }
+      .footer__social { gap: 12px; }
     }
   </style>
 </head>
@@ -774,7 +853,9 @@
        ============================================================ -->
   <header class="navbar" id="navbar">
     <div class="container navbar__inner">
-      <a href="#hero" class="navbar__brand">Lumeena House</a>
+      <a href="#hero" class="navbar__brand">
+        <img src="lumeena-logo-1.png" alt="Lumeena House" class="navbar__logo">
+      </a>
 
       <nav class="navbar__links" id="navbarLinks">
         <a href="#about">Tentang</a>
@@ -977,19 +1058,25 @@
        ============================================================ -->
   <section class="section" id="story">
     <div class="container">
-      <div class="story">
-        <span class="eyebrow eyebrow--center">Cerita Kami</span>
-        <h2>Cerita di Balik <em>Lumeena House</em></h2>
+      <div class="story__grid">
+        <div class="story__photo">
+          <img src="MUA sedang merias model dengan fokus (section 6).jpg" alt="MUA sedang merias model dengan fokus" />
+        </div>
 
-        <div class="story__divider"></div>
+        <div class="story__content">
+          <span class="eyebrow">Cerita Kami</span>
+          <h2>Cerita di Balik <em>Lumeena House</em></h2>
 
-        <p>
-          Lumeena House lahir dari percakapan yang berulang kali kami dengar dari para MUA independen. Cerita tentang malam-malam sibuk menghitung uang masuk-keluar sendirian, tentang harga yang nggak berani dinaikkan meski udah pantas, tentang rasa lelah yang datang bukan dari makeup, tapi dari semua hal di baliknya yang harus dipikirkan sendiri.
-        </p>
+          <div class="story__divider"></div>
 
-        <p>
-          Kami percaya, setiap MUA yang udah bertahan sejauh ini pantas punya seseorang yang berdiri di sisinya. Bukan buat ngajarin teknik baru, tapi buat bantu merapikan dan memperkuat apa yang udah susah payah dibangun. Itulah kenapa Lumeena House ada: jadi teman seperjalanan di balik layar, supaya kamu nggak perlu membesarkan bisnis ini sendirian lagi.
-        </p>
+          <p>
+            Lumeena House lahir dari percakapan yang berulang kali kami dengar dari para MUA independen. Cerita tentang malam-malam sibuk menghitung uang masuk-keluar sendirian, tentang harga yang nggak berani dinaikkan meski udah pantas, tentang rasa lelah yang datang bukan dari makeup, tapi dari semua hal di baliknya yang harus dipikirkan sendiri.
+          </p>
+
+          <p>
+            Kami percaya, setiap MUA yang udah bertahan sejauh ini pantas punya seseorang yang berdiri di sisinya. Bukan buat ngajarin teknik baru, tapi buat bantu merapikan dan memperkuat apa yang udah susah payah dibangun. Itulah kenapa Lumeena House ada: jadi teman seperjalanan di balik layar, supaya kamu nggak perlu membesarkan bisnis ini sendirian lagi.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -1018,15 +1105,27 @@
        ============================================================ -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__brand">Lumeena House</div>
+      <img src="lumeena-logo-1.png" alt="Lumeena House" class="footer__logo">
       <p class="footer__tagline">
         Business growth partner untuk independent makeup artists di Surabaya, Sidoarjo &amp; Gresik.
       </p>
 
-      <ul class="footer__links">
-        <li><a href="https://instagram.com/lumeena.house" target="_blank" rel="noopener">Instagram @lumeena.house</a></li>
-        <li><a href="https://threads.net/@lumeena.house" target="_blank" rel="noopener">Threads @lumeena.house</a></li>
-        <li><a href="https://wa.me/62890000000" target="_blank" rel="noopener">WhatsApp +62 890-000-000</a></li>
+      <ul class="footer__social" aria-label="Sosial media dan kontak">
+        <li>
+          <a href="https://www.instagram.com/lumeena.house" target="_blank" rel="noopener" aria-label="Instagram Lumeena House" class="footer__social--instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.threads.com/@lumeena.house?xmt=AQG0LawyY7bK97VRPnvATJzxp7ePN7r6u1Uec0Gha1yyURI" target="_blank" rel="noopener" aria-label="Threads Lumeena House" class="footer__social--threads">
+            <i class="fa-brands fa-threads"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://wa.me/62890000000" target="_blank" rel="noopener" aria-label="WhatsApp Lumeena House" class="footer__social--whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </li>
       </ul>
 
       <p class="footer__copy">© 2026 Lumeena House. All rights reserved.</p>
