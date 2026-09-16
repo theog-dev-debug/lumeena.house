@@ -10,10 +10,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  <!-- Fonts: Playfair Display (serif elegan) + Unica One (accent) + Inter (sans-serif tipis) -->
+  <!-- Fonts: Playfair Display (serif display) + Inter (UI/body sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Unica+One&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============ BRAND TOKENS ============ */
@@ -37,7 +37,7 @@
       --font-display: 'Playfair Display', Georgia, serif;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-accent: 'Unica One', 'Arial Narrow', sans-serif;
+      --font-accent: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
       --radius-lg: 24px;
       --radius-md: 16px;
@@ -86,9 +86,9 @@
     /* ============ TIPOGRAFI GLOBAL ============ */
     .eyebrow {
       font-family: var(--font-accent);
-      font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 0.3em;
+      font-weight: 600;
+      font-size: 12.5px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--maroon-soft);
       margin-bottom: 18px;
@@ -173,12 +173,12 @@
       justify-content: center;
       gap: 10px;
       font-family: var(--font-accent);
-      font-weight: 400;
-      font-size: 13px;
-      letter-spacing: 0.16em;
+      font-weight: 600;
+      font-size: 13.5px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 18px 32px;
+      padding: 18px 34px 18px 36px;
       border-radius: 99px;
       border: 1px solid transparent;
       cursor: pointer;
@@ -262,9 +262,9 @@
 
     .navbar__links a {
       font-family: var(--font-accent);
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--ink);
@@ -298,7 +298,10 @@
     .navbar__cta {
       background: var(--maroon);
       color: var(--cream) !important;
-      padding: 14px 30px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 14px 30px 14px 32px;
       border-radius: 99px;
       line-height: 1;
       transition: all 0.25s ease;
@@ -564,8 +567,9 @@
 
     .pillar__num {
       font-family: var(--font-accent);
-      font-size: 14px;
-      letter-spacing: 0.2em;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.14em;
       color: var(--champagne-text);
       margin-bottom: 18px;
       display: block;
@@ -1313,10 +1317,10 @@
           #lumeena-check-app * { box-sizing: border-box; margin: 0; padding: 0; }
 
           #lumeena-check-app .ck-eyebrow {
-            font-family: 'Unica One', 'Arial Narrow', sans-serif;
-            font-weight: 400;
-            font-size: 13.5px;
-            letter-spacing: .28em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 12.5px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: #9A7B38;
             margin-bottom: 20px;
@@ -1357,10 +1361,10 @@
           #lumeena-check-app .ck-progress-meta {
             display: flex;
             justify-content: space-between;
-            font-family: 'Unica One', sans-serif;
-            font-weight: 400;
-            font-size: 12.5px;
-            letter-spacing: .2em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #6F625B;
             margin-bottom: 12px;
@@ -1429,7 +1433,7 @@
           }
 
           #lumeena-check-app .ck-option .ck-marker {
-            font-family: 'Unica One', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-weight: 400;
             font-size: 14px;
             color: #9A7B38;
@@ -1448,10 +1452,10 @@
           }
 
           #lumeena-check-app .ck-btn-back {
-            font-family: 'Unica One', sans-serif;
-            font-weight: 400;
-            font-size: 13px;
-            letter-spacing: .16em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 12.5px;
+            letter-spacing: 0.09em;
             text-transform: uppercase;
             color: #6F625B;
             background: none;
@@ -1470,10 +1474,10 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-family: 'Unica One', sans-serif;
-            font-weight: 400;
-            font-size: 13px;
-            letter-spacing: .16em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 12.5px;
+            letter-spacing: 0.09em;
             text-transform: uppercase;
             text-decoration: none;
             padding: 18px 30px;
@@ -1565,10 +1569,10 @@
           }
 
           #lumeena-check-app .ck-score-total {
-            font-family: 'Unica One', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-weight: 400;
             font-size: 14px;
-            letter-spacing: .12em;
+            letter-spacing: 0.08em;
             color: #6F625B;
             text-transform: lowercase;
           }
@@ -1593,10 +1597,10 @@
           }
 
           #lumeena-check-app .ck-result-block .ck-label {
-            font-family: 'Unica One', sans-serif;
-            font-weight: 400;
-            font-size: 12.5px;
-            letter-spacing: .2em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #9A7B38;
             margin-bottom: 9px;
