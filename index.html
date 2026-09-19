@@ -1297,9 +1297,20 @@
   // Susun payload yang dikirim ke Google Sheets.
   // "pertanyaan" & "jawaban" dikirim sebagai array sejajar (index sama = pasangan yang sama),
   // supaya Apps Script bisa bikin header kolom otomatis dari teks pertanyaannya.
+  // Helper function to format timestamp into ISO string with WIB (+07:00) offset
+    function getWIBTimestamp() {
+    const now = new Date();
+    const wibOffset = 7 * 60; // 7 hours in minutes
+    const wibDate = new Date(now.getTime() + wibOffset * 60000);
+    
+    // Construct ISO string with +07:00 timezone offset
+    return wibDate.toISOString().replace('Z', '+07:00');
+  }
+
+  // Susun payload yang dikirim ke Google Sheets.
   function buildPayload(score, band) {
     return {
-      timestamp: new Date().toISOString(),
+      timestamp: getWIBTimestamp(),
       nama: contact.nama,
       whatsapp: contact.whatsapp,
       email: contact.email,
