@@ -1153,654 +1153,910 @@
        ============================================================ -->
   <script>
     (function() {
-      // Konfigurasi
-      const WA_NUMBER = "62890000000"; // ganti dengan nomor Lumeena House
+  // Konfigurasi
+  const WA_NUMBER = "62890000000"; // ganti dengan nomor Lumeena House
 
-      // Data pertanyaan
-      const questions = [
-        {
-          q: "Sudah berapa lama kamu menjalankan bisnis MUA secara profesional?",
-          options: [
-            { text: "Kurang dari 2 tahun", points: 1 },
-            { text: "2–5 tahun", points: 2 },
-            { text: "Lebih dari 5 tahun", points: 3 }
-          ]
-        },
-        {
-          q: "Kira-kira sudah berapa banyak klien yang kamu tangani sejauh ini?",
-          options: [
-            { text: "Kurang dari 100 klien", points: 1 },
-            { text: "100–300 klien", points: 2 },
-            { text: "Lebih dari 300 klien", points: 3 }
-          ]
-        },
-        {
-          q: "Bagaimana cara kamu menentukan harga jasa saat ini?",
-          options: [
-            { text: "Masih sering nego per klien, belum ada patokan jelas", points: 1 },
-            { text: "Sudah ada harga paket, tapi kadang masih fleksibel", points: 2 },
-            { text: "Harga paket jelas dan konsisten, jarang dinego", points: 3 }
-          ]
-        },
-        {
-          q: "Bagaimana kondisi pencatatan keuangan bisnis kamu?",
-          options: [
-            { text: "Belum ada pencatatan rutin", points: 1 },
-            { text: "Dicatat sesekali, belum rapi", points: 2 },
-            { text: "Dicatat rutin dan dievaluasi berkala", points: 3 }
-          ]
-        },
-        {
-          q: "Kapan terakhir kali kamu menaikkan harga jasa?",
-          options: [
-            { text: "Nggak ingat, atau belum pernah", points: 1 },
-            { text: "Lebih dari setahun yang lalu", points: 2 },
-            { text: "Dalam setahun terakhir, dengan pertimbangan matang", points: 3 }
-          ]
-        },
-        {
-          q: "Siapa yang mengerjakan operasional bisnis (booking, komunikasi klien, keuangan, marketing)?",
-          options: [
-            { text: "Semua aku kerjakan sendiri", points: 1 },
-            { text: "Sebagian sudah dibantu orang lain", points: 2 },
-            { text: "Sudah ada sistem atau tim yang membantu sebagian besar", points: 3 }
-          ]
-        },
-        {
-          q: "Kalau tiba-tiba kamu sakit dan nggak bisa kerja selama 2 minggu, apa yang terjadi ke bisnismu?",
-          options: [
-            { text: "Bisnis langsung berhenti total", points: 1 },
-            { text: "Beberapa hal masih jalan, tapi keteteran", points: 2 },
-            { text: "Bisnis tetap berjalan dengan bantuan sistem atau tim", points: 3 }
-          ]
-        },
-        {
-          q: "Bagaimana strategi marketing kamu saat ini?",
-          options: [
-            { text: "Cuma mengandalkan repeat order dan word-of-mouth", points: 1 },
-            { text: "Ada beberapa strategi, tapi belum konsisten", points: 2 },
-            { text: "Ada strategi marketing dan branding yang jelas dan konsisten", points: 3 }
-          ]
-        },
-        {
-          q: "Apa yang paling sering bikin kamu capek secara mental dalam menjalankan bisnis ini?",
-          options: [
-            { text: "Semuanya sekaligus — klien, keuangan, branding", points: 1 },
-            { text: "Salah satu aspek tertentu, tapi masih bisa dikelola", points: 2 },
-            { text: "Sudah cukup terkendali, capeknya lebih ke workload teknis", points: 3 }
-          ]
-        },
-        {
-          q: "Kalau bisa pilih satu hal yang paling ingin kamu perbaiki dalam 6 bulan ke depan, apa itu?",
-          options: [
-            { text: "Dasar-dasar bisnis — harga, keuangan, sistem", points: 1 },
-            { text: "Strategi pertumbuhan dan marketing", points: 2 },
-            { text: "Memperkuat posisi dan memperluas tim atau skala", points: 3 }
-          ]
+  // ⚠️ GANTI dengan URL Web App dari Google Apps Script kamu (lihat apps-script-code.gs)
+  // Contoh formatnya: https://script.google.com/macros/s/AKfycb.../exec
+  const SHEET_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbw7kOYLqH4q3UffZ3quPG3NKLI513Z6qQC1IKVIoNjQApCSkPrA8whRa1P_dEZOaZLV/exec";
+
+  // Data pertanyaan
+  const questions = [
+    {
+      q: "Sudah berapa lama kamu menjalankan bisnis MUA secara profesional?",
+      options: [
+        { text: "Kurang dari 2 tahun", points: 1 },
+        { text: "2–5 tahun", points: 2 },
+        { text: "Lebih dari 5 tahun", points: 3 }
+      ]
+    },
+    {
+      q: "Kira-kira sudah berapa banyak klien yang kamu tangani sejauh ini?",
+      options: [
+        { text: "Kurang dari 100 klien", points: 1 },
+        { text: "100–300 klien", points: 2 },
+        { text: "Lebih dari 300 klien", points: 3 }
+      ]
+    },
+    {
+      q: "Bagaimana cara kamu menentukan harga jasa saat ini?",
+      options: [
+        { text: "Masih sering nego per klien, belum ada patokan jelas", points: 1 },
+        { text: "Sudah ada harga paket, tapi kadang masih fleksibel", points: 2 },
+        { text: "Harga paket jelas dan konsisten, jarang dinego", points: 3 }
+      ]
+    },
+    {
+      q: "Bagaimana kondisi pencatatan keuangan bisnis kamu?",
+      options: [
+        { text: "Belum ada pencatatan rutin", points: 1 },
+        { text: "Dicatat sesekali, belum rapi", points: 2 },
+        { text: "Dicatat rutin dan dievaluasi berkala", points: 3 }
+      ]
+    },
+    {
+      q: "Kapan terakhir kali kamu menaikkan harga jasa?",
+      options: [
+        { text: "Nggak ingat, atau belum pernah", points: 1 },
+        { text: "Lebih dari setahun yang lalu", points: 2 },
+        { text: "Dalam setahun terakhir, dengan pertimbangan matang", points: 3 }
+      ]
+    },
+    {
+      q: "Siapa yang mengerjakan operasional bisnis (booking, komunikasi klien, keuangan, marketing)?",
+      options: [
+        { text: "Semua aku kerjakan sendiri", points: 1 },
+        { text: "Sebagian sudah dibantu orang lain", points: 2 },
+        { text: "Sudah ada sistem atau tim yang membantu sebagian besar", points: 3 }
+      ]
+    },
+    {
+      q: "Kalau tiba-tiba kamu sakit dan nggak bisa kerja selama 2 minggu, apa yang terjadi ke bisnismu?",
+      options: [
+        { text: "Bisnis langsung berhenti total", points: 1 },
+        { text: "Beberapa hal masih jalan, tapi keteteran", points: 2 },
+        { text: "Bisnis tetap berjalan dengan bantuan sistem atau tim", points: 3 }
+      ]
+    },
+    {
+      q: "Bagaimana strategi marketing kamu saat ini?",
+      options: [
+        { text: "Cuma mengandalkan repeat order dan word-of-mouth", points: 1 },
+        { text: "Ada beberapa strategi, tapi belum konsisten", points: 2 },
+        { text: "Ada strategi marketing dan branding yang jelas dan konsisten", points: 3 }
+      ]
+    },
+    {
+      q: "Apa yang paling sering bikin kamu capek secara mental dalam menjalankan bisnis ini?",
+      options: [
+        { text: "Semuanya sekaligus — klien, keuangan, branding", points: 1 },
+        { text: "Salah satu aspek tertentu, tapi masih bisa dikelola", points: 2 },
+        { text: "Sudah cukup terkendali, capeknya lebih ke workload teknis", points: 3 }
+      ]
+    },
+    {
+      q: "Kalau bisa pilih satu hal yang paling ingin kamu perbaiki dalam 6 bulan ke depan, apa itu?",
+      options: [
+        { text: "Dasar-dasar bisnis — harga, keuangan, sistem", points: 1 },
+        { text: "Strategi pertumbuhan dan marketing", points: 2 },
+        { text: "Memperkuat posisi dan memperluas tim atau skala", points: 3 }
+      ]
+    }
+  ];
+
+  // Result bands
+  const bands = [
+    {
+      min: 10, max: 16,
+      name: "Skilled Artist",
+      condition: "Kamu masih di tahap awal membangun fondasi bisnis. Sebagian besar operasional masih kamu pegang sendiri, harga belum konsisten, dan belum ada sistem yang menopang kalau kamu berhenti sebentar saja.",
+      urgent: "Di skor ini, bisnismu 100% bergantung pada tenaga dan waktu kamu pribadi — nggak ada jarak aman. Setiap hari kamu nggak kerja = setiap hari itu nggak ada pemasukan, dan nggak ada yang bisa gantiin peran kamu di operasional."
+    },
+    {
+      min: 17, max: 23,
+      name: "Growing Operator",
+      condition: "Kamu punya jam terbang dan basis klien yang solid, tapi ada 1–2 titik lemah (biasanya di harga, keuangan, atau delegasi) yang menahan kamu dari naik kelas.",
+      urgent: "Ini titik paling rawan stagnan — cukup nyaman untuk merasa \u201Cbaik-baik saja\u201D, tapi cukup rapuh untuk kehilangan momentum kalau nggak segera dibenahi. Banyak MUA bertahan di skor ini selama bertahun-tahun tanpa sadar."
+    },
+    {
+      min: 24, max: 30,
+      name: "Beautypreneur-in-Progress",
+      condition: "Fondasi bisnis kamu udah kuat di hampir semua sisi — harga jelas, keuangan tercatat, ada mulai sistem/tim.",
+      urgent: "Kamu udah terlalu jauh untuk berhenti di level ini. Risiko terbesar sekarang bukan bertahan, tapi stuck di ukuran bisnis yang sama tanpa strategi yang tepat untuk benar-benar scale up — momentum ini gampang hilang kalau nggak segera diarahkan."
+    }
+  ];
+
+  // State
+  let current = 0;
+  // Tiap elemen: null, atau { points, text }
+  const answers = new Array(questions.length).fill(null);
+  let locked = false;
+  const contact = { nama: "", whatsapp: "", email: "" };
+  // null = belum submit, true = berhasil kesimpan, false = gagal kesimpan
+  let submitSucceeded = null;
+
+  const app = document.getElementById("lumeena-check-app");
+
+  // Helper
+  function getBand(score) {
+    return bands.find(b => score >= b.min && score <= b.max) || bands[0];
+  }
+
+  function totalScore() {
+    return answers.reduce((sum, a) => sum + (a ? a.points : 0), 0);
+  }
+
+  function buildWaLink(score, band) {
+    const message =
+      `Halo Lumeena House, saya sudah ikut Beautypreneur Readiness Check. ` +
+      `Skor saya ${score} (${band.name}). ` +
+      `Saya ingin konsultasi tentang langkah berikutnya untuk bisnis MUA saya.`;
+    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+  }
+
+  // Susun payload yang dikirim ke Google Sheets.
+  // "pertanyaan" & "jawaban" dikirim sebagai array sejajar (index sama = pasangan yang sama),
+  // supaya Apps Script bisa bikin header kolom otomatis dari teks pertanyaannya.
+  function buildPayload(score, band) {
+    return {
+      timestamp: new Date().toISOString(),
+      nama: contact.nama,
+      whatsapp: contact.whatsapp,
+      email: contact.email,
+      skor: score,
+      kategori: band.name,
+      pertanyaan: questions.map(q => q.q),
+      jawaban: answers.map(a => (a ? a.text : ""))
+    };
+  }
+
+  async function submitToSheet(score, band) {
+    if (!SHEET_ENDPOINT_URL || SHEET_ENDPOINT_URL.indexOf("PASTE_URL") === 0) {
+      console.warn("SHEET_ENDPOINT_URL belum di-set. Data tidak dikirim ke Google Sheets.");
+      return false;
+    }
+    try {
+      // mode "no-cors" dipakai karena Apps Script Web App tidak mengirim header CORS.
+      // Ini artinya kita tidak bisa membaca isi response, jadi keberhasilan hanya
+      // dianggap sukses kalau fetch tidak melempar error jaringan.
+      await fetch(SHEET_ENDPOINT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(buildPayload(score, band))
+      });
+      return true;
+    } catch (err) {
+      console.error("Gagal mengirim data ke Google Sheets:", err);
+      return false;
+    }
+  }
+
+  // ===== Styles (scoped to the embedded app) =====
+  const checkStyles = `
+    <style>
+      #lumeena-check-app {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 400;
+        color: #2A211E;
+        background: #FFFFFF;
+        border: 1px solid rgba(214,185,129,.35);
+        border-radius: 24px;
+        padding: 56px 52px 48px;
+        box-shadow: 0 20px 60px rgba(108,7,0,.06), 0 4px 16px rgba(42,33,30,.04);
+        position: relative;
+        max-width: 640px;
+        margin: 0 auto;
+        overflow: hidden;
+        line-height: 1.6;
+      }
+
+      #lumeena-check-app::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 64px; height: 2px;
+        background: linear-gradient(90deg, transparent, #D6B981, transparent);
+        border-radius: 99px;
+      }
+
+      #lumeena-check-app * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      #lumeena-check-app .ck-eyebrow {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 12.5px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #9A7B38;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      #lumeena-check-app h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(32px, 6.4vw, 48px);
+        line-height: 1.16;
+        text-align: center;
+        letter-spacing: .01em;
+        color: #2A211E;
+        margin-bottom: 18px;
+      }
+
+      #lumeena-check-app h1 em {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        color: #6c0700;
+      }
+
+      #lumeena-check-app h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 500;
+        font-size: clamp(24px, 4.4vw, 30px);
+        line-height: 1.28;
+        text-align: center;
+        color: #2A211E;
+        margin-bottom: 14px;
+      }
+
+      #lumeena-check-app .ck-lede {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 16.5px;
+        line-height: 1.75;
+        text-align: center;
+        color: #6B5E58;
+        max-width: 440px;
+        margin: 0 auto 34px;
+      }
+
+      #lumeena-check-app .ck-progress-wrap { margin-bottom: 30px; }
+
+      #lumeena-check-app .ck-progress-meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #6F625B;
+        margin-bottom: 12px;
+      }
+
+      #lumeena-check-app .ck-progress-track {
+        height: 2px;
+        background: #EFD9D2;
+        border-radius: 99px;
+        overflow: hidden;
+      }
+
+      #lumeena-check-app .ck-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #6c0700, #D6B981);
+        border-radius: 99px;
+        transition: width .4s ease;
+      }
+
+      #lumeena-check-app .ck-question {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 500;
+        font-size: clamp(20px, 3.6vw, 25px);
+        line-height: 1.44;
+        color: #2A211E;
+        margin-bottom: 28px;
+        letter-spacing: .005em;
+      }
+
+      #lumeena-check-app .ck-options {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+
+      #lumeena-check-app .ck-option {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 15.5px;
+        line-height: 1.5;
+        text-align: left;
+        color: #2A211E;
+        background: #FBF7F1;
+        border: 1px solid rgba(214,185,129,.32);
+        border-radius: 10px;
+        padding: 17px 22px;
+        cursor: pointer;
+        transition: all .22s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        width: 100%;
+      }
+
+      #lumeena-check-app .ck-option:hover {
+        background: #F6E7E1;
+        border-color: #D6B981;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(108,7,0,.06);
+      }
+
+      #lumeena-check-app .ck-option.selected {
+        background: #EFD9D2;
+        border-color: #D6B981;
+      }
+
+      #lumeena-check-app .ck-option .ck-marker {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #9A7B38;
+        letter-spacing: .08em;
+        flex-shrink: 0;
+        padding-top: 3px;
+        min-width: 14px;
+      }
+
+      #lumeena-check-app .ck-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 28px;
+        gap: 12px;
+      }
+
+      #lumeena-check-app .ck-btn-back {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 12.5px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: #6F625B;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px 0;
+        transition: color .2s ease;
+      }
+
+      #lumeena-check-app .ck-btn-back:hover { color: #6c0700; }
+      #lumeena-check-app .ck-btn-back:disabled { opacity: .3; cursor: default; }
+      #lumeena-check-app .ck-btn-back:disabled:hover { color: #6F625B; }
+
+      #lumeena-check-app .ck-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 12.5px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 18px 30px;
+        border-radius: 99px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all .25s ease;
+        width: 100%;
+        text-align: center;
+      }
+
+      #lumeena-check-app .ck-btn:disabled {
+        opacity: .55;
+        cursor: default;
+        transform: none !important;
+        box-shadow: none !important;
+      }
+
+      #lumeena-check-app .ck-btn-primary {
+        background: #6c0700;
+        color: #FBF7F1;
+        border-color: #6c0700;
+      }
+
+      #lumeena-check-app .ck-btn-primary:hover {
+        background: #8a2a22;
+        border-color: #8a2a22;
+        box-shadow: 0 10px 28px rgba(108,7,0,.22);
+        transform: translateY(-1px);
+      }
+
+      #lumeena-check-app .ck-btn-wa {
+        background: transparent;
+        color: #6c0700;
+        border-color: rgba(214,185,129,.5);
+      }
+
+      #lumeena-check-app .ck-btn-wa:hover {
+        background: #F6E7E1;
+        border-color: #D6B981;
+        transform: translateY(-1px);
+      }
+
+      #lumeena-check-app .ck-start-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      #lumeena-check-app .ck-meta-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        margin: 0 auto 34px;
+        max-width: 400px;
+      }
+
+      #lumeena-check-app .ck-meta-list li {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 14.5px;
+        color: #6B5E58;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        line-height: 1.55;
+      }
+
+      #lumeena-check-app .ck-meta-list li::before {
+        content: "✦";
+        color: #D6B981;
+        font-size: 10px;
+        padding-top: 4px;
+        flex-shrink: 0;
+      }
+
+      #lumeena-check-app .ck-result-score {
+        text-align: center;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      #lumeena-check-app .ck-score-number {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 600;
+        font-size: clamp(72px, 15vw, 100px);
+        line-height: 1;
+        color: #6c0700;
+        letter-spacing: .01em;
+      }
+
+      #lumeena-check-app .ck-score-total {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: #6F625B;
+        text-transform: lowercase;
+      }
+
+      #lumeena-check-app .ck-band-name {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(26px, 5.2vw, 34px);
+        text-align: center;
+        color: #2A211E;
+        margin-bottom: 30px;
+        line-height: 1.2;
+      }
+
+      #lumeena-check-app .ck-result-block {
+        background: #FBF7F1;
+        border-left: 2px solid #D6B981;
+        padding: 20px 24px;
+        margin-bottom: 14px;
+        border-radius: 0 10px 10px 0;
+      }
+
+      #lumeena-check-app .ck-result-block .ck-label {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #9A7B38;
+        margin-bottom: 9px;
+      }
+
+      #lumeena-check-app .ck-result-block p {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 1.75;
+        color: #6B5E58;
+        margin: 0;
+      }
+
+      #lumeena-check-app .ck-result-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      #lumeena-check-app .ck-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(214,185,129,.5), transparent);
+        margin: 32px 0;
+      }
+
+      #lumeena-check-app .ck-fade-in {
+        animation: ckFadeIn .42s ease both;
+      }
+
+      @keyframes ckFadeIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ===== Form kontak ===== */
+      #lumeena-check-app .ck-field {
+        margin-bottom: 18px;
+        text-align: left;
+      }
+
+      #lumeena-check-app .ck-field label {
+        display: block;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9A7B38;
+        margin-bottom: 8px;
+      }
+
+      #lumeena-check-app .ck-field input {
+        width: 100%;
+        font-family: 'Inter', sans-serif;
+        font-size: 15.5px;
+        color: #2A211E;
+        background: #FBF7F1;
+        border: 1px solid rgba(214,185,129,.4);
+        border-radius: 10px;
+        padding: 14px 16px;
+        transition: border-color .2s ease, box-shadow .2s ease;
+      }
+
+      #lumeena-check-app .ck-field input:focus {
+        outline: none;
+        border-color: #D6B981;
+        box-shadow: 0 0 0 3px rgba(214,185,129,.18);
+      }
+
+      #lumeena-check-app .ck-field input.ck-invalid {
+        border-color: #6c0700;
+      }
+
+      #lumeena-check-app .ck-field-error {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 12.5px;
+        color: #6c0700;
+        margin-top: 6px;
+        min-height: 16px;
+      }
+
+      #lumeena-check-app .ck-btn-block {
+        margin-top: 18px;
+      }
+
+      #lumeena-check-app .ck-save-warning {
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #9A7B38;
+        background: #FBF7F1;
+        border: 1px dashed rgba(214,185,129,.5);
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-top: 18px;
+        text-align: center;
+      }
+
+      @media (max-width: 560px) {
+        #lumeena-check-app {
+          padding: 42px 26px 36px;
+          border-radius: 16px;
         }
-      ];
-
-      // Result bands
-      const bands = [
-        {
-          min: 10, max: 16,
-          name: "Skilled Artist",
-          condition: "Kamu masih di tahap awal membangun fondasi bisnis. Sebagian besar operasional masih kamu pegang sendiri, harga belum konsisten, dan belum ada sistem yang menopang kalau kamu berhenti sebentar saja.",
-          urgent: "Di skor ini, bisnismu 100% bergantung pada tenaga dan waktu kamu pribadi — nggak ada jarak aman. Setiap hari kamu nggak kerja = setiap hari itu nggak ada pemasukan, dan nggak ada yang bisa gantiin peran kamu di operasional."
-        },
-        {
-          min: 17, max: 23,
-          name: "Growing Operator",
-          condition: "Kamu punya jam terbang dan basis klien yang solid, tapi ada 1–2 titik lemah (biasanya di harga, keuangan, atau delegasi) yang menahan kamu dari naik kelas.",
-          urgent: "Ini titik paling rawan stagnan — cukup nyaman untuk merasa \u201Cbaik-baik saja\u201D, tapi cukup rapuh untuk kehilangan momentum kalau nggak segera dibenahi. Banyak MUA bertahan di skor ini selama bertahun-tahun tanpa sadar."
-        },
-        {
-          min: 24, max: 30,
-          name: "Beautypreneur-in-Progress",
-          condition: "Fondasi bisnis kamu udah kuat di hampir semua sisi — harga jelas, keuangan tercatat, ada mulai sistem/tim.",
-          urgent: "Kamu udah terlalu jauh untuk berhenti di level ini. Risiko terbesar sekarang bukan bertahan, tapi stuck di ukuran bisnis yang sama tanpa strategi yang tepat untuk benar-benar scale up — momentum ini gampang hilang kalau nggak segera diarahkan."
-        }
-      ];
-
-      // State
-      let current = 0;
-      const answers = new Array(questions.length).fill(null);
-      let locked = false;
-
-      const app = document.getElementById("lumeena-check-app");
-
-      // Helper
-      function getBand(score) {
-        return bands.find(b => score >= b.min && score <= b.max) || bands[0];
+        #lumeena-check-app::before { width: 48px; }
+        #lumeena-check-app .ck-option { padding: 15px 18px; font-size: 14.5px; }
+        #lumeena-check-app .ck-result-block { padding: 18px 20px; }
       }
+    </style>
+  `;
 
-      function totalScore() {
-        return answers.reduce((sum, p) => sum + (p || 0), 0);
-      }
+  // ===== Render functions =====
+  function renderStart() {
+    app.innerHTML = checkStyles + `
+      <p class="ck-eyebrow">Lumeena House</p>
+      <h1>Beautypreneur<br><em>Readiness Check</em></h1>
+      <p class="ck-lede">
+        10 pertanyaan untuk tahu di mana posisi bisnis MUA kamu —
+        dan apa yang paling urgent dibenahi.
+      </p>
 
-      function buildWaLink(score, band) {
-        const message =
-          `Halo Lumeena House, saya sudah ikut Beautypreneur Readiness Check. ` +
-          `Skor saya ${score} (${band.name}). ` +
-          `Saya ingin konsultasi tentang langkah berikutnya untuk bisnis MUA saya.`;
-        return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
-      }
+      <ul class="ck-meta-list">
+        <li>2 menit selesai</li>
+        <li>Langsung dapat skor 10–30</li>
+        <li>Hasil berisi rekomendasi langkah berikutnya</li>
+        <li>Untuk MUA di Surabaya, Sidoarjo &amp; Gresik</li>
+      </ul>
 
-      // ===== Styles (scoped to the embedded app) =====
-      const checkStyles = `
-        <style>
-          #lumeena-check-app {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 400;
-            color: #2A211E;
-            background: #FFFFFF;
-            border: 1px solid rgba(214,185,129,.35);
-            border-radius: 24px;
-            padding: 56px 52px 48px;
-            box-shadow: 0 20px 60px rgba(108,7,0,.06), 0 4px 16px rgba(42,33,30,.04);
-            position: relative;
-            max-width: 640px;
-            margin: 0 auto;
-            overflow: hidden;
-            line-height: 1.6;
-          }
+      <div class="ck-start-actions">
+        <button class="ck-btn ck-btn-primary" id="ck-btn-start">Mulai Beautypreneur Readiness Check</button>
+        <a class="ck-btn ck-btn-wa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener">
+          Hubungi Kami di WhatsApp
+        </a>
+      </div>
+    `;
 
-          #lumeena-check-app::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 64px; height: 2px;
-            background: linear-gradient(90deg, transparent, #D6B981, transparent);
-            border-radius: 99px;
-          }
+    document.getElementById("ck-btn-start").addEventListener("click", () => {
+      current = 0;
+      answers.fill(null);
+      contact.nama = "";
+      contact.whatsapp = "";
+      contact.email = "";
+      submitSucceeded = null;
+      renderQuestion();
+    });
+  }
 
-          #lumeena-check-app * { box-sizing: border-box; margin: 0; padding: 0; }
+  function renderQuestion() {
+    locked = false;
+    const item = questions[current];
+    const progress = (current / questions.length) * 100;
 
-          #lumeena-check-app .ck-eyebrow {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 600;
-            font-size: 12.5px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #9A7B38;
-            margin-bottom: 20px;
-            text-align: center;
-          }
+    app.innerHTML = checkStyles + `
+      <div class="ck-progress-wrap">
+        <div class="ck-progress-meta">
+          <span>Pertanyaan ${current + 1} / ${questions.length}</span>
+          <span>${Math.round(progress)}%</span>
+        </div>
+        <div class="ck-progress-track">
+          <div class="ck-progress-fill" style="width:${progress}%"></div>
+        </div>
+      </div>
 
-          #lumeena-check-app h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 400;
-            font-size: clamp(32px, 6.4vw, 48px);
-            line-height: 1.16;
-            text-align: center;
-            letter-spacing: .01em;
-            color: #2A211E;
-            margin-bottom: 18px;
-          }
+      <p class="ck-question">${item.q}</p>
 
-          #lumeena-check-app h1 em {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
-            font-weight: 500;
-            color: #6c0700;
-          }
+      <div class="ck-options" id="ck-options">
+        ${item.options.map((opt, i) => `
+          <button class="ck-option" data-points="${opt.points}" data-index="${i}">
+            <span class="ck-marker">${String.fromCharCode(65 + i)}</span>
+            <span>${opt.text}</span>
+          </button>
+        `).join("")}
+      </div>
 
-          #lumeena-check-app .ck-lede {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 16.5px;
-            line-height: 1.75;
-            text-align: center;
-            color: #6B5E58;
-            max-width: 440px;
-            margin: 0 auto 34px;
-          }
+      <div class="ck-nav">
+        <button class="ck-btn-back" id="ck-btn-back" ${current === 0 ? "disabled" : ""}>
+          ← Kembali
+        </button>
+      </div>
+    `;
 
-          #lumeena-check-app .ck-progress-wrap { margin-bottom: 30px; }
+    app.classList.remove("ck-fade-in");
+    void app.offsetWidth;
+    app.classList.add("ck-fade-in");
 
-          #lumeena-check-app .ck-progress-meta {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 600;
-            font-size: 12px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #6F625B;
-            margin-bottom: 12px;
-          }
+    document.querySelectorAll("#lumeena-check-app .ck-option").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (locked) return;
+        locked = true;
 
-          #lumeena-check-app .ck-progress-track {
-            height: 2px;
-            background: #EFD9D2;
-            border-radius: 99px;
-            overflow: hidden;
-          }
+        btn.classList.add("selected");
+        const idx = parseInt(btn.dataset.index, 10);
+        const opt = item.options[idx];
+        answers[current] = { points: opt.points, text: opt.text };
 
-          #lumeena-check-app .ck-progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #6c0700, #D6B981);
-            border-radius: 99px;
-            transition: width .4s ease;
-          }
-
-          #lumeena-check-app .ck-question {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 500;
-            font-size: clamp(20px, 3.6vw, 25px);
-            line-height: 1.44;
-            color: #2A211E;
-            margin-bottom: 28px;
-            letter-spacing: .005em;
-          }
-
-          #lumeena-check-app .ck-options {
-            display: flex;
-            flex-direction: column;
-            gap: 11px;
-          }
-
-          #lumeena-check-app .ck-option {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 15.5px;
-            line-height: 1.5;
-            text-align: left;
-            color: #2A211E;
-            background: #FBF7F1;
-            border: 1px solid rgba(214,185,129,.32);
-            border-radius: 10px;
-            padding: 17px 22px;
-            cursor: pointer;
-            transition: all .22s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            width: 100%;
-          }
-
-          #lumeena-check-app .ck-option:hover {
-            background: #F6E7E1;
-            border-color: #D6B981;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(108,7,0,.06);
-          }
-
-          #lumeena-check-app .ck-option.selected {
-            background: #EFD9D2;
-            border-color: #D6B981;
-          }
-
-          #lumeena-check-app .ck-option .ck-marker {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            color: #9A7B38;
-            letter-spacing: .08em;
-            flex-shrink: 0;
-            padding-top: 3px;
-            min-width: 14px;
-          }
-
-          #lumeena-check-app .ck-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 28px;
-            gap: 12px;
-          }
-
-          #lumeena-check-app .ck-btn-back {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 600;
-            font-size: 12.5px;
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-            color: #6F625B;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px 0;
-            transition: color .2s ease;
-          }
-
-          #lumeena-check-app .ck-btn-back:hover { color: #6c0700; }
-          #lumeena-check-app .ck-btn-back:disabled { opacity: .3; cursor: default; }
-          #lumeena-check-app .ck-btn-back:disabled:hover { color: #6F625B; }
-
-          #lumeena-check-app .ck-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 600;
-            font-size: 12.5px;
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 18px 30px;
-            border-radius: 99px;
-            border: 1px solid transparent;
-            cursor: pointer;
-            transition: all .25s ease;
-            width: 100%;
-            text-align: center;
-          }
-
-          #lumeena-check-app .ck-btn-primary {
-            background: #6c0700;
-            color: #FBF7F1;
-            border-color: #6c0700;
-          }
-
-          #lumeena-check-app .ck-btn-primary:hover {
-            background: #8a2a22;
-            border-color: #8a2a22;
-            box-shadow: 0 10px 28px rgba(108,7,0,.22);
-            transform: translateY(-1px);
-          }
-
-          #lumeena-check-app .ck-btn-wa {
-            background: transparent;
-            color: #6c0700;
-            border-color: rgba(214,185,129,.5);
-          }
-
-          #lumeena-check-app .ck-btn-wa:hover {
-            background: #F6E7E1;
-            border-color: #D6B981;
-            transform: translateY(-1px);
-          }
-
-          #lumeena-check-app .ck-start-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 8px;
-          }
-
-          #lumeena-check-app .ck-meta-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 11px;
-            margin: 0 auto 34px;
-            max-width: 400px;
-          }
-
-          #lumeena-check-app .ck-meta-list li {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 14.5px;
-            color: #6B5E58;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            line-height: 1.55;
-          }
-
-          #lumeena-check-app .ck-meta-list li::before {
-            content: "✦";
-            color: #D6B981;
-            font-size: 10px;
-            padding-top: 4px;
-            flex-shrink: 0;
-          }
-
-          #lumeena-check-app .ck-result-score {
-            text-align: center;
-            margin-bottom: 28px;
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-          }
-
-          #lumeena-check-app .ck-score-number {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 600;
-            font-size: clamp(72px, 15vw, 100px);
-            line-height: 1;
-            color: #6c0700;
-            letter-spacing: .01em;
-          }
-
-          #lumeena-check-app .ck-score-total {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            letter-spacing: 0.08em;
-            color: #6F625B;
-            text-transform: lowercase;
-          }
-
-          #lumeena-check-app .ck-band-name {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
-            font-weight: 500;
-            font-size: clamp(26px, 5.2vw, 34px);
-            text-align: center;
-            color: #2A211E;
-            margin-bottom: 30px;
-            line-height: 1.2;
-          }
-
-          #lumeena-check-app .ck-result-block {
-            background: #FBF7F1;
-            border-left: 2px solid #D6B981;
-            padding: 20px 24px;
-            margin-bottom: 14px;
-            border-radius: 0 10px 10px 0;
-          }
-
-          #lumeena-check-app .ck-result-block .ck-label {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 600;
-            font-size: 12px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #9A7B38;
-            margin-bottom: 9px;
-          }
-
-          #lumeena-check-app .ck-result-block p {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 15px;
-            line-height: 1.75;
-            color: #6B5E58;
-            margin: 0;
-          }
-
-          #lumeena-check-app .ck-result-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 32px;
-          }
-
-          #lumeena-check-app .ck-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(214,185,129,.5), transparent);
-            margin: 32px 0;
-          }
-
-          #lumeena-check-app .ck-fade-in {
-            animation: ckFadeIn .42s ease both;
-          }
-
-          @keyframes ckFadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-
-          @media (max-width: 560px) {
-            #lumeena-check-app {
-              padding: 42px 26px 36px;
-              border-radius: 16px;
-            }
-            #lumeena-check-app::before { width: 48px; }
-            #lumeena-check-app .ck-option { padding: 15px 18px; font-size: 14.5px; }
-            #lumeena-check-app .ck-result-block { padding: 18px 20px; }
-          }
-        </style>
-      `;
-
-      // ===== Render functions =====
-      function renderStart() {
-        app.innerHTML = checkStyles + `
-          <p class="ck-eyebrow">Lumeena House</p>
-          <h1>Beautypreneur<br><em>Readiness Check</em></h1>
-          <p class="ck-lede">
-            10 pertanyaan untuk tahu di mana posisi bisnis MUA kamu —
-            dan apa yang paling urgent dibenahi.
-          </p>
-
-          <ul class="ck-meta-list">
-            <li>2 menit selesai, tanpa email</li>
-            <li>Langsung dapat skor 10–30</li>
-            <li>Hasil berisi rekomendasi langkah berikutnya</li>
-            <li>Untuk MUA di Surabaya, Sidoarjo &amp; Gresik</li>
-          </ul>
-
-          <div class="ck-start-actions">
-            <button class="ck-btn ck-btn-primary" id="ck-btn-start">Mulai Beautypreneur Readiness Check</button>
-            <a class="ck-btn ck-btn-wa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener">
-              Hubungi Kami di WhatsApp
-            </a>
-          </div>
-        `;
-
-        document.getElementById("ck-btn-start").addEventListener("click", () => {
-          current = 0;
-          answers.fill(null);
-          renderQuestion();
-        });
-      }
-
-      function renderQuestion() {
-        locked = false;
-        const item = questions[current];
-        const progress = (current / questions.length) * 100;
-
-        app.innerHTML = checkStyles + `
-          <div class="ck-progress-wrap">
-            <div class="ck-progress-meta">
-              <span>Pertanyaan ${current + 1} / ${questions.length}</span>
-              <span>${Math.round(progress)}%</span>
-            </div>
-            <div class="ck-progress-track">
-              <div class="ck-progress-fill" style="width:${progress}%"></div>
-            </div>
-          </div>
-
-          <p class="ck-question">${item.q}</p>
-
-          <div class="ck-options" id="ck-options">
-            ${item.options.map((opt, i) => `
-              <button class="ck-option" data-points="${opt.points}" data-index="${i}">
-                <span class="ck-marker">${String.fromCharCode(65 + i)}</span>
-                <span>${opt.text}</span>
-              </button>
-            `).join("")}
-          </div>
-
-          <div class="ck-nav">
-            <button class="ck-btn-back" id="ck-btn-back" ${current === 0 ? "disabled" : ""}>
-              ← Kembali
-            </button>
-          </div>
-        `;
-
-        app.classList.remove("ck-fade-in");
-        void app.offsetWidth;
-        app.classList.add("ck-fade-in");
-
-        document.querySelectorAll("#lumeena-check-app .ck-option").forEach(btn => {
-          btn.addEventListener("click", () => {
-            if (locked) return;
-            locked = true;
-
-            btn.classList.add("selected");
-            answers[current] = parseInt(btn.dataset.points, 10);
-
-            setTimeout(() => {
-              if (current < questions.length - 1) {
-                current++;
-                renderQuestion();
-              } else {
-                renderResult();
-              }
-            }, 260);
-          });
-        });
-
-        document.getElementById("ck-btn-back").addEventListener("click", () => {
-          if (current > 0) {
-            current--;
+        setTimeout(() => {
+          if (current < questions.length - 1) {
+            current++;
             renderQuestion();
+          } else {
+            renderContactForm();
           }
-        });
+        }, 260);
+      });
+    });
+
+    document.getElementById("ck-btn-back").addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    });
+  }
+
+  function renderContactForm() {
+    locked = false;
+
+    app.innerHTML = checkStyles + `
+      <p class="ck-eyebrow">Satu Langkah Lagi</p>
+      <h2>Sebelum lihat hasilnya...</h2>
+      <p class="ck-lede">
+        Isi data kontak kamu supaya hasil dan rekomendasinya bisa kami simpan dan tindak lanjuti.
+      </p>
+
+      <form id="ck-contact-form" novalidate>
+        <div class="ck-field">
+          <label for="ck-nama">Nama Lengkap</label>
+          <input type="text" id="ck-nama" name="nama" placeholder="Nama kamu" autocomplete="name" />
+          <span class="ck-field-error" id="ck-error-nama"></span>
+        </div>
+
+        <div class="ck-field">
+          <label for="ck-wa">Nomor WhatsApp</label>
+          <input type="tel" id="ck-wa" name="whatsapp" placeholder="08xxxxxxxxxx" autocomplete="tel" />
+          <span class="ck-field-error" id="ck-error-wa"></span>
+        </div>
+
+        <div class="ck-field">
+          <label for="ck-email">Email</label>
+          <input type="email" id="ck-email" name="email" placeholder="nama@email.com" autocomplete="email" />
+          <span class="ck-field-error" id="ck-error-email"></span>
+        </div>
+
+        <button type="submit" class="ck-btn ck-btn-primary ck-btn-block" id="ck-btn-submit-form">
+          Lihat Hasil Saya
+        </button>
+
+        <div class="ck-nav" style="justify-content:center; margin-top:16px;">
+          <button type="button" class="ck-btn-back" id="ck-btn-back-form">← Kembali ke pertanyaan terakhir</button>
+        </div>
+      </form>
+    `;
+
+    app.classList.remove("ck-fade-in");
+    void app.offsetWidth;
+    app.classList.add("ck-fade-in");
+
+    document.getElementById("ck-btn-back-form").addEventListener("click", () => {
+      current = questions.length - 1;
+      renderQuestion();
+    });
+
+    document.getElementById("ck-contact-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (locked) return;
+
+      const namaInput = document.getElementById("ck-nama");
+      const waInput = document.getElementById("ck-wa");
+      const emailInput = document.getElementById("ck-email");
+
+      const errNama = document.getElementById("ck-error-nama");
+      const errWa = document.getElementById("ck-error-wa");
+      const errEmail = document.getElementById("ck-error-email");
+
+      [namaInput, waInput, emailInput].forEach(el => el.classList.remove("ck-invalid"));
+      errNama.textContent = "";
+      errWa.textContent = "";
+      errEmail.textContent = "";
+
+      const nama = namaInput.value.trim();
+      const wa = waInput.value.trim();
+      const email = emailInput.value.trim();
+
+      let hasError = false;
+
+      if (!nama) {
+        errNama.textContent = "Nama wajib diisi.";
+        namaInput.classList.add("ck-invalid");
+        hasError = true;
       }
 
-      function renderResult() {
-        const score = totalScore();
-        const band = getBand(score);
-
-        app.innerHTML = checkStyles + `
-          <p class="ck-eyebrow">Hasil Kamu</p>
-
-          <div class="ck-result-score">
-            <span class="ck-score-number">${score}</span>
-            <span class="ck-score-total">dari total 30 poin</span>
-          </div>
-
-          <h2 class="ck-band-name">${band.name}</h2>
-
-          <div class="ck-result-block">
-            <div class="ck-label">Kondisi Kamu</div>
-            <p>${band.condition}</p>
-          </div>
-
-          <div class="ck-result-block">
-            <div class="ck-label">Kenapa Ini Urgent</div>
-            <p>${band.urgent}</p>
-          </div>
-
-          <div class="ck-divider"></div>
-
-          <p class="ck-lede" style="margin-bottom:22px;">
-            Mau tahu langkah konkret berikutnya? Diskusikan hasilmu dengan kami.
-          </p>
-
-          <div class="ck-result-actions">
-            <a class="ck-btn ck-btn-primary"
-               href="${buildWaLink(score, band)}"
-               target="_blank" rel="noopener">
-              Hubungi Kami di WhatsApp
-            </a>
-            <button class="ck-btn ck-btn-wa" id="ck-btn-restart">Ulangi Beautypreneur Readiness Check</button>
-          </div>
-        `;
-
-        app.classList.remove("ck-fade-in");
-        void app.offsetWidth;
-        app.classList.add("ck-fade-in");
-
-        document.getElementById("ck-btn-restart").addEventListener("click", () => {
-          current = 0;
-          answers.fill(null);
-          renderStart();
-        });
+      const waDigits = wa.replace(/\D/g, "");
+      if (!wa || waDigits.length < 9) {
+        errWa.textContent = "Nomor WhatsApp wajib diisi dengan benar.";
+        waInput.classList.add("ck-invalid");
+        hasError = true;
       }
 
-      // Init
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailPattern.test(email)) {
+        errEmail.textContent = "Format email tidak valid.";
+        emailInput.classList.add("ck-invalid");
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      locked = true;
+      contact.nama = nama;
+      contact.whatsapp = wa;
+      contact.email = email;
+
+      const submitBtn = document.getElementById("ck-btn-submit-form");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Mengirim...";
+
+      const score = totalScore();
+      const band = getBand(score);
+
+      submitSucceeded = await submitToSheet(score, band);
+
+      renderResult();
+    });
+  }
+
+  function renderResult() {
+    const score = totalScore();
+    const band = getBand(score);
+
+    app.innerHTML = checkStyles + `
+      <p class="ck-eyebrow">Hasil Kamu</p>
+
+      <div class="ck-result-score">
+        <span class="ck-score-number">${score}</span>
+        <span class="ck-score-total">dari total 30 poin</span>
+      </div>
+
+      <h2 class="ck-band-name">${band.name}</h2>
+
+      <div class="ck-result-block">
+        <div class="ck-label">Kondisi Kamu</div>
+        <p>${band.condition}</p>
+      </div>
+
+      <div class="ck-result-block">
+        <div class="ck-label">Kenapa Ini Urgent</div>
+        <p>${band.urgent}</p>
+      </div>
+
+      <div class="ck-divider"></div>
+
+      <p class="ck-lede" style="margin-bottom:22px;">
+        Mau tahu langkah konkret berikutnya? Diskusikan hasilmu dengan kami.
+      </p>
+
+      <div class="ck-result-actions">
+        <a class="ck-btn ck-btn-primary"
+           href="${buildWaLink(score, band)}"
+           target="_blank" rel="noopener">
+          Hubungi Kami di WhatsApp
+        </a>
+        <button class="ck-btn ck-btn-wa" id="ck-btn-restart">Ulangi Beautypreneur Readiness Check</button>
+      </div>
+
+      ${submitSucceeded === false ? `
+        <p class="ck-save-warning">
+          Catatan: data kamu belum berhasil tersimpan otomatis karena kendala jaringan.
+          Silakan screenshot hasil ini kalau perlu, atau hubungi kami langsung lewat WhatsApp.
+        </p>
+      ` : ""}
+    `;
+
+    app.classList.remove("ck-fade-in");
+    void app.offsetWidth;
+    app.classList.add("ck-fade-in");
+
+    document.getElementById("ck-btn-restart").addEventListener("click", () => {
+      current = 0;
+      answers.fill(null);
+      contact.nama = "";
+      contact.whatsapp = "";
+      contact.email = "";
+      submitSucceeded = null;
       renderStart();
-    })();
+    });
+  }
+
+  // Init
+  renderStart();
+})();
   </script>
 
 </body>
